@@ -16,7 +16,8 @@ public class QueryProcessor {
         } else if (query.contains("name")) {
            return "MyTeam";
         } else if (query.contains("largest")) { // TODO extend the programm here
-            var numsString = query.substring(query.lastIndexOf(":"));
+            var numsString = query.substring(query.lastIndexOf(":") + 1)
+                                         .replace("%", "");
             int max = Arrays.stream(numsString.split(","))
                             .mapToInt(Integer::parseInt)
                             .max()

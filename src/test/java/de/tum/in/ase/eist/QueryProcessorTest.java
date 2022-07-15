@@ -30,4 +30,11 @@ class QueryProcessorTest {
 		}
 	}
 
+	@Test
+	void numbers() {
+		String ret = queryProcessor.process("%20which%20of%20the%20following%20numbers%20is%20the%20largest:%2079,%20675,%2024,%2033");
+		int actual = Integer.parseInt(ret);
+		assertEquals(20675, actual);
+	}
+
 }
