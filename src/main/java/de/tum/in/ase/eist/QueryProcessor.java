@@ -7,8 +7,6 @@ import java.util.Arrays;
 @Service
 public class QueryProcessor {
 
-    public static final String LARGEST = "which of the following numbers is the largest:";
-
     public String process(String query) {
 		query = query.toLowerCase();
         if (query.contains("shakespeare")) {
@@ -17,16 +15,12 @@ public class QueryProcessor {
                     "writer in the English language and the world's pre-eminent dramatist.";
         } else if (query.contains("name")) {
            return "MyTeam";
-        } else if (query.contains(LARGEST)) { // TODO extend the programm here
-            var numsString = query.substring(LARGEST.length());
-            var nums = numsString.split(",");
-            int[] numsInt = new int[nums.length];
-
-            for (int i = 0; i < nums.length; ++i) {
-                numsInt[i] = Integer.parseInt(nums[i]);
-            }
-
-            int max = Arrays.stream(numsInt).max().getAsInt();
+        } else if (query.contains("largest")) { // TODO extend the programm here
+            var numsString = query.substring(query.lastIndexOf(":"));
+            int max = Arrays.stream(numsString.split(","))
+                            .mapToInt(Integer::parseInt)
+                            .max()
+                            .getAsInt();
 
             return String.format("%d", max);
         } else {
